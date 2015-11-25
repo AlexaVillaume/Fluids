@@ -1,0 +1,289 @@
+\documentclass[12pt]{article}
+ \usepackage{amsmath}
+ \usepackage{mathtools}
+ \usepackage{accents}
+ \usepackage{hyperref}
+
+ \newcommand*{\dt}[1]{%
+  \accentset{\mbox{\large\bfseries .}}{#1}}
+  
+ \begin{document}
+ 
+ \title{Problem Set 2}
+\author{Alexa Villaume\\ 
+Astrophysical Flows} 
+ 
+\maketitle
+
+\noindent \textbf{Problem 2 The Viscous Disk} The spreading (over many orbital period) of a thin gas disk with viscosity $\nu_g$ is described by a diffusion-like equation for the disk surface density, $\sigma\left(r,t\right)$, obtained by combining the continuity equation with the momentum equation:
+
+\begin{equation*}
+\frac{\partial \sigma}{\partial t} = - \frac{1}{r}\frac{\partial}{\partial r}\left[ \left(\frac{\partial \Omega r^2}{\partial r}\right)^{-1} \frac{\partial}{\partial r}\left( \omega \nu_g r^3 \frac{\partial \Omega}{\partial r}\right)\right].
+\end{equation*} 
+
+\begin{itemize}
+\item \textbf{(a)} Derive this equation.
+
+The continuity equation for a viscous disk is given by the following expression,
+
+\begin{equation}
+r\frac{\partial \sigma}{\partial t} + \frac{\partial}{\partial r}(r \sigma \nu_g) = 0,
+\end{equation}
+
+and the angular momentum equation is given by,
+
+\begin{equation}
+\frac{\partial}{\partial t}\left( \sigma r^2 \Omega \right) + \frac{1}{r}\frac{\partial}{\partial r}\left(\sigma r^3 \Omega v_r\right) = \frac{1}{r} \frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right).
+\end{equation}
+
+The second term on the left-hand side of the momentum equation can be broken up using the product rule,
+
+\begin{equation}
+\frac{1}{r}\frac{\partial}{\partial r}\left(\sigma r^3 \Omega v_r\right) = \Omega r\frac{\partial}{\partial r}\left(\sigma r v_r\right)  + rv_r\sigma \frac{\partial}{\partial r}\left(\Omega r^2\right).
+\end{equation}
+
+This can be used to substitute the continuity equation into the momentum equation to get,
+
+\begin{equation}
+\frac{\partial}{\partial t}\left(\sigma r^2 \Omega\right) - \Omega r^2 \frac{\partial \sigma}{\partial t} + v_r\sigma \frac{\partial}{\partial r}\left(\Omega r^2\right) = \frac{1}{r} \frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right).
+\end{equation}
+
+\begin{equation}
+r\frac{\partial}{\partial t}\left(\sigma r^2 \Omega\right) - \Omega r^3 \frac{\partial \sigma}{\partial t} + rv_r\sigma \frac{\partial}{\partial r}\left(\Omega r^2\right) = \frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right).
+\end{equation}
+
+The first term on the left hand side can be expanded using the product rule,
+
+\begin{equation}
+r^3\Omega \frac{\partial \sigma}{\partial t} + \sigma r\frac{\partial}{\partial t}\left(r^2 \Omega\right) - \Omega r^3 \frac{\partial \sigma}{\partial t} + rv_r\sigma \frac{\partial}{\partial r}\left(\Omega r^2\right) = \frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right).
+\end{equation}
+
+Neither the radius nor the the Keplerian velocity depends on time so the second term on the left hand side goes to 0 and the first and third term on the left hand side cancel,  
+
+\begin{equation}
+ rv_r\sigma \frac{\partial}{\partial r}\left(\Omega r^2\right) = \frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right).
+\end{equation}
+
+\begin{equation}
+ rv_r\sigma = \left(  \frac{\partial}{\partial r}\left(\Omega r^2\right)\right)^{-1}\frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right).
+\end{equation}
+
+\begin{equation}
+ \frac{\partial}{\partial r} \left(rv_r\sigma\right) = \frac{\partial}{\partial r} \left[ \left(  \frac{\partial}{\partial r}\left(\Omega r^2\right)\right)^{-1}\frac{\partial}{\partial r}\left(\nu_g\sigma r^3 \frac{\partial \Omega}{\partial r}\right)\right].
+\end{equation}
+
+The continuity equation can be switched in again to get the original equation,
+
+\begin{equation}
+\frac{\partial \sigma}{\partial t} = - \frac{1}{r}\frac{\partial}{\partial r}\left[ \left(\frac{\partial \Omega r^2}{\partial r}\right)^{-1} \frac{\partial}{\partial r}\left( \omega \nu_g r^3 \frac{\partial \Omega}{\partial r}\right)\right].
+\end{equation} 
+
+\item \textbf{(b)} Write down some physically motivated boundary conditions, and explain what they imply.
+
+At $r=0$, $\sigma\left(0\right) = M_{\rm tot}/r^2$.
+At $r=R$, $\sigma\left(0\right) = 0$.
+
+They imply that the surface density of the disk drops off as the disk extends in the radial direction.
+
+\item \textbf{(c)} Solve the equation numerically for the evolution of a gaseous ring with a gaussian radial surface density profile. Choose reasonable values for the parameters, and explain your choices.
+
+I'll start with a simplified version of the equation derived in Part a,
+
+\begin{equation}
+\frac{\partial \sigma}{\partial t} = \frac{3}{r}\frac{\partial}{\partial r}\left[r^{1/2}\frac{\partial}{\partial r}\left(\nu \sigma r^{1/2} \right)\right].
+\end{equation}
+
+I know that $\nu$, the kinematic viscosity, is $\alpha c_s H$, $H$, the scale of the disk, is $c_s/\Omega$, and $\Omega$, the Keplerian rotational frequency, is $\sqrt{\frac{GM}{r^3}}$ so the expression above becomes,
+
+\begin{equation}
+\frac{\partial \sigma}{\partial t} = \frac{3}{r}\frac{\partial}{\partial r}\left[r^{1/2}\frac{\partial}{\partial r}\left(\frac{\alpha c_s^2}{G^{1/2}M^{1/2}} \sigma r^2 \right)\right].
+\end{equation}
+
+I'm going to let $F \equiv \frac{\alpha c_s^2}{G^{1/2}M^{1/2}}$ and assume that it's constant, so that,
+
+\begin{equation}
+\frac{\partial \sigma}{\partial t} = \frac{3F}{r}\frac{\partial}{\partial r}\left[r^{1/2}\frac{\partial}{\partial r}\left( \sigma r^2 \right)\right].
+\end{equation}
+
+To solve this equation numerically I'm first going to simplify it a bit, 
+
+\begin{equation}
+\frac{\partial \sigma}{\partial t} = \frac{3F}{r}\frac{\partial r^{1/2}}{\partial r}\frac{\partial^2 }{\partial r^2}\left( \sigma r^2 \right).
+\end{equation}
+
+I'm going to use a mix of the forward differencing method and central differencing,
+
+\begin{equation}
+\frac{\sigma_{r, t+1} - \sigma_{r,t}}{\Delta t} = \frac{3F}{r_{r,t}}\frac{r^{1/2}_{r+1,t} - r^{1/2}_{r,t}}{\Delta r}\frac{\sigma_{r+1,t}r^2_{r+1,t} - 2\sigma_{r,t}r^2_{r,t} + \sigma_{r-1,t}r^2_{r-1,t}}{\left(\Delta r \right)^2}.
+\end{equation}
+
+I define the spatial mesh and from the problem I know to use a Guassian profile to get the initial conditions on the surface densities, $\sigma_{r,t}$. That leaves $\sigma_{r,t+1}$ as the unknown in this equation. Solving for it is easy,
+
+\begin{equation}
+\sigma_{r, t+1}  = \sigma_{r,t} + \frac{3F\Delta t}{r_{r,t}}\frac{r^{1/2}_{r+1,t} - r^{1/2}_{r,t}}{\Delta r}\frac{\sigma_{r+1,t}r^2_{r+1,t} - 2\sigma_{r,t}r^2_{r,t} + \sigma_{r-1,t}r^2_{r-1,t}}{\left(\Delta r \right)^2}.
+\end{equation}
+
+To get the value of $F$, $\alpha$ has been inferred to be about $10^{-2}$ (e.g. Hartman et al. 1998) to explain the disk lifetimes in nearby T Tauri stars and a reasonable value for the sound speed $c_s$ is $0.6 {\rm ~km ~s^{-1}}$.
+
+The code to solve for the evolution of the disk is located at, \url{https://github.com/AlexaVillaume/Fluids/blob/master/diffusion_disk.py}
+
+
+\end{itemize}
+
+
+
+
+
+
+
+
+\noindent \textbf{Problem 3 Shock Jump Conditions} This problem is mostly analytic, and is largely lifted from Shu's Gas Dynamics textbook...
+
+\begin{itemize}
+\item \textbf{(a)} Give the standard jump conditions for normal shocks,
+
+\begin{equation*}
+\rho_2u_2 = \rho_1 u_1, P_2 + \rho_2 u_2^2 = P_1 + \rho_1u_1^2, h_2 + u_2^2/2 = h_1 + u1^2/2,
+\end{equation*}
+
+where $h = \varepsilon + P/\rho = \gamma / \left( \gamma --1\right)\rho$ is the {\it specific enthalpy} of an ideal gas. Derive the {\it Prandtl-Meyer relation},
+
+\begin{equation*}
+u_1u_2 = c_{*}^2,
+\end{equation*}
+ 
+ where $ c_{*}^2$ is given by,
+ 
+ \begin{equation*}
+ \left( \frac{\gamma + 1}{\gamma -1}\right)\frac{ c_{*}^2}{2} = h + \frac{u^2}{2},
+ \end{equation*}
+ 
+ and equals a conserved quantity across the shock i.e manipulate the jump conditions into the form,
+ 
+ \begin{equation*}
+ \left(u_1 - u_2\right)\left( \frac{ c_{*}^2}{u1u1} - 1 \right) = 0.
+ \end{equation*}
+ 
+Then show that,
+
+\begin{equation*}
+a_1^2 \equiv \gamma P_1/\rho_1 <  c_{*}^2 < a_2^2 \equiv \gamma P_2/\rho_2,
+\end{equation*}
+
+and that the Prandtl-Meyer relation requires, for a (compressive) shock, the upstream flow to the supersonic, $u_1 > a_1$, and the downstream flow to  be subsonic, $u_2 < a_2$.
+
+\item \textbf{(b)} Next comes an investigation of the structure of a viscous shock layer. The one-dimensional time-independent fluid equations (of continuity, momentum, and energy), including the effects of viscosity and conductivity are,
+
+\begin{equation*}
+\rho u = {\rm constant} \equiv j_0,
+\end{equation*}
+
+\begin{equation*}
+\rho u^2 + P - \frac{4}{3}\mu \frac{du}{dx} = constant,
+\end{equation*}
+
+\begin{equation*}
+\rho u \left( h + \frac{u^2}{2} \right) - \mathcal{K}\frac{dT}{dx} - \frac{4}{3}\mu u \frac{du}{dx} = constant \equiv f_0.
+\end{equation*}
+
+We can analytically preform a qualitatively correct integration of the energy equation by taking advantage of a lucky circumstance. Consider that {\it Eucken's formula} for a neutral gas implies,
+
+\begin{equation*}
+\frac{3}{4}\frac{\mathcal{K}}{\mu c_P} = \frac{3(9\gamma -5)}{16\gamma},
+\end{equation*}
+
+which equals $9/8$ for $\gamma = 5/3$ (a monotonic gas) and $57/56$ for $\gamma = 7/5$ (a diatomic gas with only rotational degrees of freedom excited). If we approximate $9/8$ or $57/56$ by unity, demonstrate that the energy equation above, with $h=c_PT$ becomes,
+
+\begin{equation*}
+j_0\left(h + \frac{u^2}{2}\right) - \frac{4}{3}\mu\frac{d}{dx}\left(h+\frac{u^2}{2}\right) = f_0.
+\end{equation*}
+
+\textbf{Answer} The right-side of Eucken's formula can be set to 1 to get,
+
+\begin{equation}
+\mathcal{K} = \frac{4}{3}\mu c_P,
+\end{equation}
+
+\begin{equation}d
+\rho u \left( h + \frac{u^2}{2} \right) -  \frac{4}{3}\mu c_P\frac{dT}{dx} - \frac{4}{3}\mu u \frac{du}{dx} = f_0,
+\end{equation}
+
+\begin{equation}
+j_0 \left(h + \frac{u^2}{2}\right) - \frac{4}{3}\mu\left(c_P\frac{dT}{dx}  + u \frac{du}{dx}   \right) = f_0.
+\end{equation}
+
+Since  $h=c_PT$,
+
+\begin{equation}
+j_0 \left(h + \frac{u^2}{2}\right) - \frac{4}{3}\mu\left(\frac{h}{T}\frac{dT}{dx}  + u \frac{du}{dx}   \right) = f_0,
+\end{equation}
+
+\begin{equation}
+j_0 \left(h + \frac{u^2}{2}\right) - \frac{4}{3}\mu\frac{d}{dx}\left(h  + u du   \right) = f_0.
+\end{equation}
+ Integrating $udu$, 
+ 
+ \begin{equation}
+j_0\left(h + \frac{u^2}{2}\right) - \frac{4}{3}\mu\frac{d}{dx}\left(h+\frac{u^2}{2}\right) = f_0.
+\end{equation}
+ 
+\item \textbf{(b)} Define $Q \equiv h + u^2/2 - f_0/j_0$, and integrate the equation above to obtain,
+
+\begin{equation*}
+Q = Q_0 \rm{exp}\left( \int_{x_0}^x \frac{3j_0}{4\mu} dx\right),
+\end{equation*}  
+
+where $Q_0$ is an integration constant.
+
+\textbf{Answer} 
+
+ \begin{equation}
+\left(h + \frac{u^2}{2}\right) - \frac{1}{j_0}\frac{4}{3}\mu\frac{d}{dx}\left(h+\frac{u^2}{2}\right)  - \frac{f_0}{j_0}= 0,
+\end{equation}
+
+
+\begin{equation}
+Q = \frac{1}{j_0}\frac{4}{3}\mu\frac{d}{dx}\left(h+\frac{u^2}{2}\right),
+\end{equation}
+
+
+\begin{equation}
+\frac{1}{Q} = \frac{3j_0}{4\mu}dx\frac{1}{d}\frac{1}{h+u^2/2},
+\end{equation}
+
+\begin{equation}
+\frac{1}{Q}d\left(Q + f_0/j_0\right) = \frac{3j_0}{4\mu}dx,
+\end{equation}
+
+\begin{equation}
+\rm{ln}(Q) + C = \int  \frac{3j_0}{4\mu}dx,
+\end{equation}
+
+\begin{equation}
+\rm{ln}(Q) = \int  \frac{3j_0}{4\mu}dx - C,
+\end{equation}
+
+\begin{equation}
+Q = {\rm exp}\left[\int  \frac{3j_0}{4\mu}dx\right]{\rm exp}\left[- C\right],
+\end{equation}
+
+\begin{equation}
+Q = Q_0{\rm exp}\left[\int  \frac{3j_0}{4\mu}dx\right]{\rm exp},
+\end{equation}
+
+\item \textbf{(b)} Show that the exponent has an order of magnitude $(x-x_0)/l$, where $l$ equals the particle mean free path. Argue, as a consequence, that $Q$ reaches unbounded values as $x-x_0$ becomes much larger than $l$ unless $Q_0$ identically equals zero. For $Q_0=0$, we have even inside the shock layer,
+
+\begin{equation*}
+h + \frac{u^2}{2} = \frac{f_0}{j_0} = {\rm constant} = \left( \frac{\gamma + 1}{\gamma-1}\right)\frac{c_{*}}{2}.
+\end{equation*}
+
+Describe qualitatively what this manipulation has accomplished. In particular, how do the rate of viscous dissipation and heat conduction offset one another here?
+
+\textbf{Answer}
+
+
+ \end{itemize}
+ 
+
+ 
+\end{document}
