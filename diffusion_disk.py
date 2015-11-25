@@ -9,7 +9,7 @@ def solve(initial_conds, radius, num_r, constant, timescale):
     # Grid points in space
     r, dr = np.linspace(0, radius, num_r+1, retstep=True)
     # Grid points in time
-    dt = 0.5
+    dt = 0.1
     Nt = int(round(timescale/float(dt)))
     t = np.linspace(0, timescale, Nt+1)
 
@@ -20,17 +20,17 @@ def solve(initial_conds, radius, num_r, constant, timescale):
     for i in range(0, num_r+1):
         surfd_1[i] = initial_conds(r[i])
 
-    for j in range(0, Nt):
+    for j in range(0, len(t)):
         for n in range(1, num_r):
             surfd[n] = surfd_1[n] + (3*constant*dt/r[n])*(((r[n+1]**0.5 - \
             r[n]**0.5)/dr) *(surfd_1[n+1]*r[n+1]**2 - 2*(surfd_1[n]*r[n]**1) \
             + surfd_1[n-1]*r[n-1]**2))
 
-    # Insert boundary conditions
-    surfd[0] = 0.087
-    surfd[num_r] = 0
-    # Switch variables before next step
-    surfd_1, surfd = surfd, surfd_1
+        # Insert boundary conditions
+        surfd[0] = 0.087
+        surfd[num_r] = 0
+        # Switch variables before next step
+        surfd_1, surfd = surfd, surfd_1
 
     return surfd_1, r, t
 
