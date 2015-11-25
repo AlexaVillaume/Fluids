@@ -1,0 +1,280 @@
+\documentclass[12pt]{article}
+ \usepackage{amsmath}
+ \usepackage{mathtools}
+ \usepackage{accents}
+
+ \newcommand*{\dt}[1]{%
+  \accentset{\mbox{\large\bfseries .}}{#1}}
+  
+ \begin{document}
+ 
+ \title{Problem Set 1}
+\author{Alexa Villaume\\ 
+Astrophysical Flows} 
+ 
+\maketitle
+
+\noindent \textbf{Problem 1} Show that hydrostatic equilibrium can be guaranteed if $P = P(\rho)$. That is, if the
+equation of state is {\it barotropic}. 
+
+\noindent {\bf Solution}
+ The general equation for hydrostatic equilibrium is, 
+ 
+ \begin{equation}
+ \nabla P = -\rho {\bf \nabla \Phi}.
+ \end{equation}
+ 
+\noindent I can break this equation down,
+ 
+ \begin{equation}
+ \frac{dP}{d\rho}\frac{d\rho}{dr} \frac{1}{\rho} = -{\bf \nabla \Phi}.
+ \end{equation}
+ 
+ \noindent If I assume that the sound speed is constant I can say, $\frac{dP}{d\rho} = {\rm c_s^2}$ so,
+ 
+ \begin{equation}
+ {\rm c_s^2} \frac{d}{dr} {\rm ln}\rho = -{\bf \nabla \Phi}.
+ \end{equation}
+ 
+ \noindent With equation 3 I have an equation that depends only on $r$ ($\rho$ depends on $r$), so one equation, one unknown. Hence, a solution  in hydrostatic equilibrium exists. \\
+ 
+ \noindent \textbf{Problem 2} Assume that a container contains a gas of atoms, with masses, m, and number density
+$n_0$. Assume that there is a distribution of velocities such that the probability of the velocity lying in the range from $u$ to $u + du$ is $f(u)du$, and $\int_0^\infty f(u)du =1$.
+
+\begin{itemize}
+
+\item Show that the total number of particles arriving per unit areal per second at
+the surface of the container is $\frac{1}{4}n_0\bar{u}$.
+
+{\bf Solution}
+The number density of atoms which have a velocity in range $f(u)du$ is given by $n_0f(u)du$. If I take the average velocity to be $\bar u$ then the flux density is $n_0f(u)du \bar u$. The number of particles crossing a surface area $d{\bf a}$ is then $n_0f(u)du \bar u d{\bf a}$. If I assume that the dimensions of the container are much larger than the mean free path of the atoms then all directions in the volume can be treated equally and it makes sense to go into spherical coordinates so,
+
+\begin{equation}
+d{\bf a} = {\rm cos}(\theta){\rm sin}(\theta)d\theta d\phi
+\end{equation}
+
+So the rate at which atoms hit the area is given by 
+
+\begin{equation}
+\frac{n_0}{4\pi}\int_{u=0}^{u=\infty}\int_{\theta=0}^{\theta=\pi/2}\int_{\phi=0}^{2\pi} f(u)du \bar ud\theta d\phi.
+\end{equation}
+
+The $4\pi$ comes from needing to divide out the total volume of the solid angle and the upper bound on $\theta$ is because I'm only integrating over one hemisphere. The above equation easily becomes $\frac{1}{4}n_0\bar u$.
+
+\item Show that the pressure on the container walls is $\frac{1}{3}n_0m \bar{u}^2$.
+
+{\bf Solution}
+
+Pressure is force per area and force is momentum per second. I need to find the momentum delivered by one particular atom and then multiply that by the number of collisions per second the atoms have with the wall. Just considering the x-component  to start, $mv_x$ can be thought of as the x-component of momentum ``in''. There is also an equal component of momentum ``out''. So the total momentum delivered to the wall by a single atom in 1 collision is $2mv_x$.
+
+Now, to get the number of collisions per second, we know that the number density of atoms in the total volume is $n_0$. However, only atoms that are close enough to the area, as determined by their velocity, will hit in a given time $t$. Therefore, atoms have to be within distance $v_xt$ to hit the area in time $t$.
+
+The number of collisions in a time $t$ is equal to the number of atoms which are within the region $v_xt$. The volume occupied by the atoms which are going to hit the area $A$ is $v_xtA$. So the number of atoms that are going to hit that area in that volume per second is $nv_xA$. So the force is $F = n_0v_xA \cdot 2mv_x$.
+
+This means that pressure is given by,
+
+\begin{equation}
+P = \frac{n_0v_xA2mv_x}{A} = 2n_0mv_x^2
+\end{equation}
+
+I feel okay about approximating that 1/2 of the atoms are moving away from the surface area of interest so I can drop that factor of 2. Furthermore, adding in the $y$ and $z$ directions adds in the factor of $1/3$ because only $1/3$ of the atoms will be moving in the right direction to hit the surface area.
+
+\begin{equation}
+P = \frac{1}{3}n_0m\bar u^2.
+\end{equation}
+
+\end{itemize}
+ 
+\noindent \textbf{Problem 3} In the first lecture, we applied a general set of order-of-magnitude arguments to argue that the molecular cloud core Barnard 68 (B68) has a temperature of $T \sim 10{\rm K}$, is composed mainly of H$_2$, has a mass of $M \simeq 1 M_{\odot}$, and a radius, $R \simeq 10^4 {\rm AU}$.
+
+\begin{itemize}
+
+\item Using our additional determinations that B68 is likely isothermal (with sound speed $c_s$) and likely in hydrostatic equilibrium, along with the equations of momentum,
+
+\begin{equation*}
+\frac{\partial {\bf u}}{\partial t} = -\left({\bf u}\cdot \nabla \right){\bf u} - \frac{\nabla P}{\rho} - \nabla{\bf \Phi}_G,
+\end{equation*}
+
+\noindent and continuity, 
+
+\begin{equation*}
+\frac{\partial \rho}{\partial t} = -\nabla (\rho \cdot {\bf u}),
+\end{equation*}
+
+derive the following second-order, nonlinear ordinary differential equation for the scaled logarithmic density, $\phi\left(\xi\right) = -{\rm ln}\left(\rho/\rho_c\right)$, in terms of the scaled, non-dimensional radius, $\xi = \left(r/c_s\right)\sqrt{4\pi G\rho_c}$:
+
+\begin{equation*}
+\frac{1}{\xi^2}\frac{d}{d\xi}\left(\xi^2\frac{d\phi}{d\xi} \right) = e^{-\phi}.
+\end{equation*}
+
+{\bf Solution}
+
+If I assume spherical symmetry, then the continuity equation becomes,
+
+\begin{equation}
+\frac{dm}{dr} = 4\pi r^2 \rho(r),
+\end{equation}
+
+and the expression for hydrostatic equilibrium becomes, 
+
+\begin{equation}
+\frac{1}{\rho(r)}\frac{dP}{dr} = - \frac{Gm(r)}{r^2}.
+\end{equation}
+
+\begin{equation}
+r^2\frac{1}{\rho(r)}\frac{dP}{dr} = - Gm(r), 
+\end{equation}
+
+\begin{equation}
+\frac{d}{dr}(\frac{r^2}{\rho(r)}\frac{dP}{dr}) = - G\frac{m(r)}{dr}, 
+\end{equation}
+
+\begin{equation}
+\frac{d}{dr}(\frac{r^2}{\rho(r)}\frac{dP}{dr}) = - G4\pi r^2 \rho(r),
+\end{equation}
+
+\begin{equation}
+\frac{d}{dr}\left(\frac{r^2}{\rho(r)}\frac{dP}{d\rho}\frac{d\rho}{dr}\right) = - G4\pi r^2 \rho(r),
+\end{equation}
+
+
+I know that $dP/d\rho = c_s^2$, so,
+
+
+\begin{equation}
+\frac{d}{dr}\left(\frac{r^2}{\rho(r)}c_s^2\frac{d\rho}{dr}\right) = - G4\pi r^2 \rho(r).
+\end{equation}
+
+\begin{equation}
+\frac{c_s^2}{4\pi G r^2} \frac{d}{dr}\left(\frac{r^2}{\rho(r)}\frac{d\rho}{dr}\right) = - \rho(r), 
+\end{equation}
+
+By definition $\rho = \rho_c {\rm e}^{-\phi}$ so,
+
+\begin{equation}
+\frac{c_s^2}{4\pi G r^2} \frac{d}{dr}\left(\frac{r^2}{\rho_c {\rm e}^{-\phi}}\frac{d}{dr}(\rho_c {\rm e}^{-\phi}) \right) = - \rho_c {\rm e}^{-\phi}, 
+\end{equation}
+
+\begin{equation}
+\frac{c_s^2}{4\pi G \rho_c r^2} \frac{d}{dr}\left(\frac{r^2}{\rho_c {\rm e}^{-\phi}}\frac{d}{dr}(\rho_c {\rm e}^{-\phi}) \right) = - {\rm e}^{-\phi}, 
+\end{equation}
+
+\begin{equation}
+\frac{c_s^2}{4\pi G \rho_c r^2} \frac{d}{dr}\left(\frac{r^2}{{\rm e}^{-\phi}}\frac{d}{dr}({\rm e}^{-\phi}) \right) = - {\rm e}^{-\phi}, 
+\end{equation}
+
+From the chain rule,
+
+\begin{equation}
+\frac{d}{dr}({\rm e}^{-\phi}) = -{\rm e}^{-\phi}\frac{d\phi}{dr}.
+\end{equation}
+
+Which I can plug back into the above equation, 
+
+\begin{equation}
+\frac{c_s^2}{4\pi G \rho_c r^2} \frac{d}{dr}\left(r^2 \frac{d\phi}{dr} \right) = - {\rm e}^{-\phi}, 
+\end{equation}
+
+
+I know that $r = \frac{\xi c_s}{\sqrt(4\pi G \rho_c)}$ so $dr = d\xi \frac{c_s}{\sqrt(4\pi G \rho_c)}$,
+
+
+\begin{equation}
+\frac{c_s^2}{4\pi G \rho_c r^2} \frac{d}{d\xi}\left(r^2 \frac{\sqrt{4\pi G \rho_c }}{cs}\frac{\sqrt{4\pi G \rho_c }}{c_s} \frac{d\phi}{d\xi} \right) = - {\rm e}^{-\phi}, 
+\end{equation}
+
+Which, from the definition of $\xi$, I can write, 
+
+
+\begin{equation}
+\frac{1}{\xi^2}\frac{d}{d\xi}\left(\xi^2\frac{d\phi}{d\xi} \right) = e^{-\phi}.
+\end{equation}
+
+\item Define a new variable, $w = d\phi/d\xi$, and rewrite the second-order ODE in terms of two first-order ODEs in a form suitable for numerical integration. Provide a physical justification of adopting the simple inner boundary conditions $\phi(0) = 0$ and $w(0) = 0$.
+
+{\bf Solution}
+Let, 
+
+\begin{equation}
+y_0 = \phi, 
+\end{equation}
+
+\noindent and,
+
+\begin{equation}
+w = \frac{d\phi}{d\xi}.
+\end{equation}
+
+\noindent So, 
+
+\begin{equation}
+\frac{d y_0}{d\xi} = w,
+\end{equation}
+
+\noindent and,
+
+\begin{equation}
+\frac{d w}{d\xi} = \frac{-2w}{\xi} + e^{-y_0}.
+\end{equation}
+
+\noindent This last equation comes from, 
+
+\begin{equation}
+\frac{d}{d\xi}\left ( \xi^2 \frac{d\phi}{d\xi} \right) = \frac{d\xi^2}{d\xi}\frac{d\phi}{d\xi} + \xi^2\frac{d^2\phi}{d^2\xi}, 
+\end{equation}
+
+\noindent Which we can substitute into the original Lane-Emden equation and solve for the derivative of $y_1$ to get,
+
+\begin{equation}
+\frac{dw}{d\xi} = \frac{-2w}{\xi} e^{-y_0}.
+\end{equation}
+
+The reason that  $\phi(0) = 0$ is justified is because $\phi = -{\rm ln}(\rho\rho_c)$ and at the the center of the cloud $\rho = \rho_c$ which means 1 is going into the natural log, which equals 0. The reason why $w(0) = 0$ is justified is because that is essentially the pressure difference as a function of radius, which would not be changing at the innermost part of cloud.
+
+
+\item Using numerical integrations, find the value of the central density, $\rho_c$, for which the cloud contains a mass $M_{\odot}$ within its radius $R = 10^4 {\rm AU}$. In order for the cloud not to explode, what does the bounding pressure of the interstellar medium need to be?
+
+{\bf Solution} 
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{problem3.pdf}
+\caption{}
+\end{figure}
+
+I approached this problem by expressing both the dimensional radius and dimensional mass in terms of $\rho_c$, $\xi$, and $w$. Since $\xi = (r/c_s)\sqrt{4\pi G\rho_c}$, then $r = \frac{\xi c_s}{\sqrt{4\pi G \rho_c}}$. To get the dimensional mass in terms of $\rho_c$ I  can start with the general expression for enclosed mass,
+
+\begin{equation}
+M = 4\pi \int_0^R r^2 \rho(r) dr.
+\end{equation}
+
+We know that $\phi = -{\rm ln}(\rho(r)/\rho_c)$, so $\rho(r) = \rho_c{\rm e}^{-\phi}$. Which I can put in the expression for enclosed mass, 
+
+\begin{equation}
+M = 4\pi \int_0^R r^2  \rho_c{\rm e}^{-\phi} dr. \text{ Furthermore, }
+\end{equation}
+
+I know that $r = \frac{\xi c_s}{\sqrt{4\pi G \rho_c}}$ and $dr = d\xi \frac{c_s}{\sqrt{4\pi G \rho_c}}$ so,
+
+\begin{equation}
+M = 4\pi\rho_c(\frac{c_s^2}{4\pi G \rho)c})^{3/2} \int_0^\xi e^{-\phi}\xi^2 d\xi.
+\end{equation}
+
+From the Lane-Emden equation, I can transform the integrand,
+
+\begin{equation}
+M = 4\pi\rho_c(\frac{c_s^2}{4\pi G \rho)c})^{3/2} \int_0^\xi \frac{d}{d\xi} ( \xi^2 \frac{d\phi}{d\xi}) d\xi.
+\end{equation}
+
+I plotted radius (AU) vs cloud mass ($M_{\odot}$) (left panel of Figure 1) and guessed $\rho_c$ values until I found a density profile that matched the constraints given in the problem, that is, the cloud has an enclosed mass of one solar mass at $10^4 {\rm AU}$. From this I get, $\rho_c = 4.8 \times 10^{-16} \text{ kg}\text{ m}^{-3}$. I also get a $\xi_{\rm max} = 4.67$.
+
+
+To get the bounding pressure of the ISM, I know that it has to equal the pressure at the surface of the cloud. I can get the the surface pressure of the cloud by numerically integrating Equation 22 taking the results to the natural exponent and multiplying the values by my $\rho_c$ value. This result of this is shown in the right panel of Figure 1. I can assume that the cloud is made of an ideal gas, so,
+
+\begin{equation}
+P = \frac{k_b}{\mu m_H}\rho_s T = 2.97 \times 10^{-12} \text{ Pa}.
+\end{equation}
+
+\end{itemize}
+
+
+\end{document}
